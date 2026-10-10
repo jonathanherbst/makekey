@@ -24,22 +24,22 @@ jobs:
 
       - name: Build
         run: |
-          rustup target add ${{ inputs.target }}
-          cargo build --release --verbose --target ${{ inputs.target }}
+          rustup target add ${{ matrix.target }}
+          cargo build --release --verbose --target ${{ matrix.target }}
 
       - name: Upload Artifacts (windows)
-        if: ${{ contains(inputs.target, 'windows') }}
+        if: ${{ contains(matrix.target, 'windows') }}
         uses: actions/upload-artifact@v7
         with:
-          name: makekey-${{ inputs.target }}
-          path: ./target/${{ inputs.target }}/release/makekey.exe
+          name: makekey-${{ matrix.target }}
+          path: ./target/${{ matrix.target }}/release/makekey.exe
 
       - name: Upload Artifacts (mac/linux)
-        if: ${{ !contains(inputs.target, 'windows') }}
+        if: ${{ !contains(matrix.target, 'windows') }}
         uses: actions/upload-artifact@v7
         with:
-          name: makekey-${{ inputs.target }}
-          path: ./target/${{ inputs.target }}/release/makekey
+          name: makekey-${{ matrix.target }}
+          path: ./target/${{ matrix.target }}/release/makekey
 
   release:
     runs-on: ubuntu-latest
