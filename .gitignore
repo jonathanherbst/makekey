@@ -1,0 +1,12 @@
+# rust
+/target
+
+# generated files
+*.key
+*.pdf
+
+# devcontainer
+.devcontainer/personal
+
+# macos crap
+.DS_Store
